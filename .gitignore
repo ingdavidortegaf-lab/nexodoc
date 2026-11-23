@@ -1,0 +1,24 @@
+# Secretos y configuración local (nunca se suben)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Datos generados
+frontend/catalog.json
+
+# Sistema
+.DS_Store
+Thumbs.db

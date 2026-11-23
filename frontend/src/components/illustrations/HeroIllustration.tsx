@@ -1,0 +1,205 @@
+"use client";
+/**
+ * Ilustración principal: ecosistema documental de NEXODOC.
+ * ARCHIVO GENERADO por tools/build_assets.py desde design/hero.svg.
+ * Edita el SVG fuente y vuelve a ejecutar el script.
+ *
+ * - Entrada escalonada de cada capa con Motion.
+ * - Flotación, flujo de conexiones y pulsos con CSS (globals.css, clases nx-*),
+ *   desactivados con prefers-reduced-motion.
+ */
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+
+export function HeroIllustration({ className = "" }: { className?: string }) {
+  const reduce = useReducedMotion();
+  const layer: Variants = {
+    hidden: { opacity: 0, y: reduce ? 0 : 24 },
+    show: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: 0.35 + i * 0.12, duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    }),
+  };
+
+  return (
+    <motion.svg
+      viewBox="0 0 600 560"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby="nx-hero-title"
+      className={`nx-hero-svg h-auto w-full ${className}`}
+      initial="hidden"
+      animate="show"
+    >
+      <title id="nx-hero-title">Ecosistema documental de NEXODOC: una solicitud en seguimiento conectada con escrituras, certificados, expedientes y entidades</title>
+      <defs>
+      <linearGradient id="nx-g-navy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#1D4A73"/><stop offset="1" stopColor="#10243A"/></linearGradient>
+      <linearGradient id="nx-g-teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#3FD6CE"/><stop offset="1" stopColor="#139C96"/></linearGradient>
+      <linearGradient id="nx-g-paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FFFFFF"/><stop offset="1" stopColor="#F4F7FA"/></linearGradient>
+      <radialGradient id="nx-g-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stopColor="#19B7B0" stopOpacity="0.26"/><stop offset="0.55" stopColor="#19B7B0" stopOpacity="0.07"/><stop offset="1" stopColor="#19B7B0" stopOpacity="0"/></radialGradient>
+      <radialGradient id="nx-g-fade" cx="0.5" cy="0.5" r="0.5"><stop offset="0.2" stopColor="#FFFFFF"/><stop offset="1" stopColor="#000000"/></radialGradient>
+      <mask id="nx-m-fade"><rect width="600" height="560" fill="url(#nx-g-fade)"/></mask>
+      <pattern id="nx-p-dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#173B5E" fillOpacity="0.18"/></pattern>
+      <filter id="nx-f-lift" x="-30%" y="-30%" width="160%" height="175%"><feDropShadow dx="0" dy="20" stdDeviation="18" floodColor="#10243A" floodOpacity="0.15"/><feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#10243A" floodOpacity="0.06"/></filter>
+      </defs>
+
+      <rect width="600" height="560" fill="url(#nx-p-dots)" mask="url(#nx-m-fade)"/>
+      <circle cx="310" cy="295" r="255" fill="url(#nx-g-glow)"/>
+      <g fill="none" stroke="#173B5E">
+      <circle cx="310" cy="295" r="205" strokeOpacity="0.10" strokeDasharray="2 7"/>
+      <circle cx="310" cy="295" r="268" strokeOpacity="0.06"/>
+      </g>
+
+      <motion.g variants={layer} custom={6}>
+      <g fill="none" stroke="#19B7B0" strokeWidth="1.6" strokeLinecap="round">
+      <path d="M180 70 C 250 22, 340 18, 409 62" strokeOpacity="0.35" strokeDasharray="4 6"/>
+      <path d="M70 266 C 30 296, 16 336, 42 368" strokeOpacity="0.35" strokeDasharray="4 6"/>
+      <path d="M545 174 C 588 222, 594 290, 564 334" strokeOpacity="0.35" strokeDasharray="4 6"/>
+      <path d="M193 472 C 206 492, 230 498, 250 497" strokeOpacity="0.35" strokeDasharray="4 6"/>
+      <path d="M480 497 C 498 498, 512 492, 520 481" strokeOpacity="0.35" strokeDasharray="4 6"/>
+      <path className="nx-flow" d="M180 70 C 250 22, 340 18, 409 62" strokeWidth="2.4" strokeDasharray="3 26"/>
+      <path className="nx-flow nx-flow-slow" d="M70 266 C 30 296, 16 336, 42 368" strokeWidth="2.4" strokeDasharray="3 26"/>
+      <path className="nx-flow" d="M545 174 C 588 222, 594 290, 564 334" strokeWidth="2.4" strokeDasharray="3 26"/>
+      </g>
+      <g fill="#19B7B0" stroke="#FFFFFF" strokeWidth="2">
+      <circle cx="180" cy="70" r="4"/><circle cx="409" cy="62" r="4"/><circle cx="70" cy="266" r="4"/><circle cx="42" cy="368" r="4"/><circle cx="545" cy="174" r="4"/><circle cx="564" cy="334" r="4"/>
+      </g>
+      <g className="nx-twinkle-group">
+      <circle className="nx-twinkle" cx="258" cy="118" r="2" fill="#19B7B0"/>
+      <circle className="nx-twinkle nx-d2" cx="98" cy="318" r="2.5" fill="#173B5E" fillOpacity="0.35"/>
+      <circle className="nx-twinkle nx-d3" cx="582" cy="122" r="1.8" fill="#19B7B0"/>
+      <circle className="nx-twinkle nx-d1" cx="362" cy="110" r="2.6" fill="#173B5E" fillOpacity="0.3"/>
+      <circle className="nx-twinkle nx-d2" cx="518" cy="262" r="2" fill="#19B7B0"/>
+      <circle className="nx-twinkle nx-d3" cx="226" cy="528" r="1.6" fill="#173B5E" fillOpacity="0.35"/>
+      <circle className="nx-twinkle nx-d1" cx="34" cy="172" r="2" fill="#19B7B0"/>
+      <circle className="nx-twinkle" cx="548" cy="532" r="2" fill="#173B5E" fillOpacity="0.3"/>
+      </g>
+      </motion.g>
+
+      <motion.g variants={layer} custom={1}>
+      <g className="nx-float nx-float-a">
+      <g transform="rotate(-7 115 165)">
+      <path d="M52 70 h104 l34 34 v144 a12 12 0 0 1 -12 12 H52 a12 12 0 0 1 -12 -12 V82 a12 12 0 0 1 12 -12z" fill="url(#nx-g-paper)" filter="url(#nx-f-lift)"/>
+      <path d="M156 70 v22 a12 12 0 0 0 12 12 h22z" fill="#E3ECF4"/>
+      <rect x="58" y="88" width="24" height="24" rx="7" fill="#10243A"/>
+      <path d="M65 95.5h10M65 100h10M65 104.5h6" stroke="#FFFFFF" strokeWidth="1.6" strokeLinecap="round"/>
+      <text x="58" y="131" fontSize="12" fontWeight="700" fill="#10243A">Escritura pública</text>
+      <text x="58" y="146" fontSize="9.5" fill="#64748B">No. 1.284 · Notaría 3</text>
+      <rect x="58" y="162" width="112" height="5" rx="2.5" fill="#E2E8F0"/>
+      <rect x="58" y="174" width="96" height="5" rx="2.5" fill="#E2E8F0"/>
+      <rect x="58" y="186" width="106" height="5" rx="2.5" fill="#E2E8F0"/>
+      <rect x="58" y="198" width="70" height="5" rx="2.5" fill="#E2E8F0"/>
+      <path d="M60 238 c8 -12 14 -12 16 -2 s8 8 14 -4 s10 -6 14 2 s8 2 12 -4" fill="none" stroke="#19B7B0" strokeWidth="1.6" strokeLinecap="round"/>
+      <circle cx="140" cy="232" r="13" fill="none" stroke="#173B5E" strokeOpacity="0.28" strokeDasharray="2 2.5"/>
+      <circle cx="140" cy="232" r="7.5" fill="#173B5E" fillOpacity="0.08"/>
+      </g>
+      </g>
+      </motion.g>
+
+      <motion.g variants={layer} custom={0}>
+      <g className="nx-float nx-float-m">
+      <rect x="165" y="150" width="290" height="290" rx="22" fill="#FFFFFF" filter="url(#nx-f-lift)"/>
+      <rect x="165.5" y="150.5" width="289" height="289" rx="21.5" fill="none" stroke="#10243A" strokeOpacity="0.06"/>
+      <rect x="189" y="172" width="30" height="30" rx="9" fill="url(#nx-g-navy)"/>
+      <path d="M198 193v-12l12 12v-12" fill="none" stroke="#FFFFFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <text x="229" y="184" fontSize="12.5" fontWeight="700" fill="#10243A">Solicitud ND-2026-0418</text>
+      <text x="229" y="200" fontSize="10.5" fill="#64748B">Certificado de tradición y libertad</text>
+      <rect x="189" y="216" width="92" height="24" rx="12" fill="#19B7B0" fillOpacity="0.12"/>
+      <circle className="nx-blink" cx="203" cy="228" r="3.5" fill="#19B7B0"/>
+      <text x="213" y="232" fontSize="11" fontWeight="600" fill="#0E8C86">En gestión</text>
+      <text x="431" y="232" textAnchor="end" fontSize="10" fill="#94A3B8">Actualizado hoy</text>
+      <line x1="189" y1="256" x2="431" y2="256" stroke="#E2E8F0"/>
+      <g strokeWidth="2" strokeLinecap="round">
+      <line x1="201" y1="292" x2="201" y2="306" stroke="#19B7B0"/>
+      <line x1="201" y1="326" x2="201" y2="340" stroke="#19B7B0"/>
+      <line x1="201" y1="360" x2="201" y2="374" stroke="#19B7B0"/>
+      <line x1="201" y1="394" x2="201" y2="408" stroke="#E2E8F0"/>
+      </g>
+      <g fill="#19B7B0"><circle cx="201" cy="282" r="9"/><circle cx="201" cy="316" r="9"/><circle cx="201" cy="350" r="9"/></g>
+      <g fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M197 282.2l2.8 2.8 5-5.4"/><path d="M197 316.2l2.8 2.8 5-5.4"/><path d="M197 350.2l2.8 2.8 5-5.4"/>
+      </g>
+      <circle className="nx-pulse" cx="201" cy="384" r="9" fill="none" stroke="#19B7B0" strokeWidth="2"/>
+      <circle cx="201" cy="384" r="9" fill="#FFFFFF" stroke="#19B7B0" strokeWidth="2"/>
+      <circle cx="201" cy="384" r="3.5" fill="#19B7B0"/>
+      <circle cx="201" cy="418" r="8.5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.6"/>
+      <g fontSize="12" fill="#10243A">
+      <text x="220" y="286">Solicitud recibida</text>
+      <text x="220" y="320">Requisitos validados</text>
+      <text x="220" y="354">Pago confirmado</text>
+      <text x="220" y="388" fontWeight="700">En gestión ante la ORIP</text>
+      <text x="220" y="422" fill="#94A3B8">Documento disponible</text>
+      </g>
+      <g fontSize="10" fill="#94A3B8" textAnchor="end">
+      <text x="412" y="286">10 nov</text>
+      <text x="412" y="320">11 nov</text>
+      <text x="412" y="354">11 nov</text>
+      <text x="412" y="388" fill="#0E8C86" fontWeight="600">Hoy</text>
+      <text x="412" y="422">Pendiente</text>
+      </g>
+      </g>
+      </motion.g>
+
+      <motion.g variants={layer} custom={2}>
+      <g className="nx-float nx-float-b">
+      <g transform="rotate(5 485 108)">
+      <rect x="405" y="48" width="160" height="120" rx="16" fill="#FFFFFF" filter="url(#nx-f-lift)"/>
+      <path d="M432 104 l-6 28 10 -5 7 8 4 -26z" fill="#0F8A84"/>
+      <path d="M448 104 l6 28 -10 -5 -7 8 -4 -26z" fill="#139C96"/>
+      <circle cx="440" cy="96" r="24" fill="none" stroke="#19B7B0" strokeOpacity="0.4" strokeDasharray="1.5 3"/>
+      <circle cx="440" cy="96" r="19" fill="url(#nx-g-teal)"/>
+      <path d="M431.5 96.5l5.5 5.5 11.5 -12" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+      <text x="474" y="90" fontSize="12" fontWeight="700" fill="#10243A">Certificado</text>
+      <text x="474" y="105" fontSize="9.5" fill="#64748B">Verificado</text>
+      <rect x="474" y="120" width="72" height="5" rx="2.5" fill="#E2E8F0"/>
+      <rect x="474" y="132" width="52" height="5" rx="2.5" fill="#E2E8F0"/>
+      <rect x="474" y="144" width="62" height="5" rx="2.5" fill="#E2E8F0"/>
+      </g>
+      </g>
+      </motion.g>
+
+      <motion.g variants={layer} custom={3}>
+      <g className="nx-float nx-float-c">
+      <g transform="translate(-30 4) rotate(-3 135 420)">
+      <path d="M60 360 h40 a8 8 0 0 1 6.4 3.2 l6.4 8.8 h97.2 a10 10 0 0 1 10 10 v88 a10 10 0 0 1 -10 10 h-150 a10 10 0 0 1 -10 -10 v-100 a10 10 0 0 1 10 -10z" fill="url(#nx-g-navy)" filter="url(#nx-f-lift)"/>
+      <rect x="68" y="378" width="132" height="70" rx="6" fill="#FFFFFF" transform="rotate(-4 134 413)"/>
+      <rect x="76" y="383" width="132" height="70" rx="6" fill="#DDE7F0" transform="rotate(3 142 418)"/>
+      <path d="M50 404 a10 10 0 0 1 10 -10 h150 a10 10 0 0 1 10 10 v66 a10 10 0 0 1 -10 10 h-150 a10 10 0 0 1 -10 -10z" fill="#173B5E"/>
+      <text x="66" y="428" fontSize="12" fontWeight="700" fill="#FFFFFF">Expediente</text>
+      <text x="66" y="444" fontSize="9.5" fill="#FFFFFF" fillOpacity="0.65">Compraventa · 4 documentos</text>
+      <rect x="66" y="454" width="66" height="17" rx="8.5" fill="#19B7B0" fillOpacity="0.2"/>
+      <text x="99" y="466" textAnchor="middle" fontSize="9" fontWeight="600" fill="#6FE6DE">Completo</text>
+      </g>
+      </g>
+      </motion.g>
+
+      <motion.g variants={layer} custom={4}>
+      <g className="nx-float nx-float-d">
+      <g transform="translate(12 0) rotate(4 495 405)">
+      <rect x="420" y="330" width="150" height="150" rx="18" fill="#FFFFFF" filter="url(#nx-f-lift)"/>
+      <rect x="436" y="346" width="118" height="84" rx="12" fill="#F4F7FA"/>
+      <path d="M459 377 L495 359 L531 377 Z" fill="url(#nx-g-navy)"/>
+      <circle cx="495" cy="370" r="2.6" fill="#19B7B0"/>
+      <rect x="457" y="378" width="76" height="5" rx="1" fill="#173B5E"/>
+      <g fill="#1D4A73"><rect x="463" y="386" width="8" height="28" rx="1"/><rect x="479" y="386" width="8" height="28" rx="1"/><rect x="503" y="386" width="8" height="28" rx="1"/><rect x="519" y="386" width="8" height="28" rx="1"/></g>
+      <rect x="455" y="414" width="80" height="5" rx="1" fill="#173B5E"/>
+      <rect x="451" y="419" width="88" height="4" rx="1" fill="#10243A"/>
+      <text x="495" y="451" textAnchor="middle" fontSize="9.5" fill="#64748B">Entidad responsable</text>
+      <text x="495" y="467" textAnchor="middle" fontSize="11" fontWeight="700" fill="#10243A">Oficina de Registro</text>
+      </g>
+      </g>
+      </motion.g>
+
+      <motion.g variants={layer} custom={5}>
+      <g className="nx-float nx-float-e">
+      <rect x="250" y="469" width="230" height="56" rx="16" fill="#10243A" filter="url(#nx-f-lift)"/>
+      <circle cx="280" cy="497" r="14" fill="url(#nx-g-teal)"/>
+      <path d="M274 497.5l4 4 8 -8.5" fill="none" stroke="#FFFFFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+      <text x="304" y="492" fontSize="11.5" fontWeight="600" fill="#FFFFFF">Solicitud en gestión</text>
+      <text x="304" y="508" fontSize="9.5" fill="#FFFFFF" fillOpacity="0.6">Te avisamos cada cambio</text>
+      <text x="464" y="492" textAnchor="end" fontSize="9" fill="#FFFFFF" fillOpacity="0.45">ahora</text>
+      </g>
+      </motion.g>
+    </motion.svg>
+  );
+}
