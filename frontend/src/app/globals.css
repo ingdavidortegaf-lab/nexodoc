@@ -74,6 +74,29 @@
     scroll-behavior: smooth;
     scroll-padding-top: 88px;
     -webkit-tap-highlight-color: transparent;
+    /* Sin agrandar texto al girar el celular */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  /* Celular: el toque responde al instante (sin espera de doble toque) */
+  a,
+  button,
+  [role="button"],
+  label,
+  summary {
+    touch-action: manipulation;
+  }
+  /* Mantener presionado un botón no selecciona su texto */
+  button,
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  /* Campos de 16 px como mínimo: iPhone no hace zoom al escribir */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
   }
   body {
     @apply bg-white font-sans text-[1.0625rem] leading-relaxed text-night antialiased;

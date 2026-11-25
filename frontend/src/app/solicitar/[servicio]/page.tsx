@@ -44,7 +44,7 @@ export default async function ServiceRequestPage({ params }: Params) {
   const from = minFrom(s.slug);
 
   return (
-    <section className="bg-hero min-h-screen pt-[72px]">
+    <section className="bg-hero min-h-svh pt-[72px]">
       {s.category && (
         <JsonLd
           data={{

@@ -56,7 +56,8 @@ export function DocumentSearch() {
               </p>
             </div>
 
-            <div>
+            {/* min-w-0: sin esto la fila de categorías (desplazable) ensancha la columna y toda la página en celular */}
+            <div className="min-w-0">
               <div className="relative">
                 <label htmlFor="buscador-documentos" className="sr-only">
                   Buscar documento por nombre

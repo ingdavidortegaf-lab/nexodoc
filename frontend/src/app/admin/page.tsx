@@ -9,7 +9,7 @@ export default async function AdminPage() {
   const jar = await cookies();
   if (!jar.get("nx_access") && !jar.get("nx_refresh")) redirect("/admin/ingresar");
   return (
-    <section className="min-h-screen bg-mist pt-[72px]">
+    <section className="min-h-svh bg-mist pt-[72px]">
       <AdminApp />
     </section>
   );

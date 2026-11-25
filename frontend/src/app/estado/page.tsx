@@ -10,7 +10,7 @@ export const metadata = buildMetadata({
 
 export default function TrackPage() {
   return (
-    <section className="bg-hero min-h-screen pt-[72px]">
+    <section className="bg-hero min-h-svh pt-[72px]">
       <div className="container-site pb-24 pt-10 lg:pt-14">
         <div className="max-w-2xl">
           <p className="font-label text-sm font-semibold text-teal-ink">Seguimiento en línea</p>

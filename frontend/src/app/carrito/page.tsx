@@ -11,7 +11,7 @@ export const metadata = buildMetadata({
 
 export default function CartPage() {
   return (
-    <section className="bg-hero min-h-screen pt-[72px]">
+    <section className="bg-hero min-h-svh pt-[72px]">
       <div className="container-site pb-24 pt-10 lg:pt-14">
         <p className="font-label text-sm font-semibold text-teal-ink">Tu pedido</p>
         <h1 className="mt-3 text-h2 font-extrabold">Carrito</h1>

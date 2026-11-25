@@ -17,7 +17,7 @@ const errors: Record<string, string> = {
 export default async function AdminLoginPage({ searchParams }: Props) {
   const { error } = await searchParams;
   return (
-    <section className="bg-hero grid min-h-screen place-items-center px-5 pb-20 pt-[104px]">
+    <section className="bg-hero grid min-h-svh place-items-center px-5 pb-20 pt-[104px]">
       <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-lift ring-1 ring-night/5 md:p-10">
         <LogoMark className="h-11 w-11" />
         <h1 className="mt-6 font-display text-2xl font-bold">Panel del equipo</h1>

@@ -22,3 +22,6 @@ frontend/catalog.json
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Configuración local de herramientas
+.claude/

@@ -46,9 +46,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#10243A",
+  // Barra del navegador del mismo color que el encabezado (blanco), no azul noche
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
+  // Con el teclado abierto en Android, la página se ajusta en vez de quedar tapada
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
