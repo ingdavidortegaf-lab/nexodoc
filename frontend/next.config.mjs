@@ -26,12 +26,25 @@ const csp = [
   "object-src 'none'",
 ].join("; ");
 
+/**
+ * STATIC_EXPORT=1 genera una versión estática (vitrina) para GitHub Pages:
+ * sin API ni panel; los pedidos se envían por WhatsApp/correo. BASE_PATH es la
+ * subruta del sitio (p. ej. "/nexodoc" en usuario.github.io/nexodoc).
+ * Las cabeceras de seguridad sólo aplican en el despliegue con servidor (Vercel).
+ */
+const staticExport = process.env.STATIC_EXPORT === "1";
+const basePath = staticExport ? process.env.BASE_PATH ?? "" : "";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  images: { formats: ["image/avif", "image/webp"] },
-  async headers() {
+  images: staticExport ? { unoptimized: true } : { formats: ["image/avif", "image/webp"] },
+  ...(staticExport && { output: "export", trailingSlash: true, basePath }),
+  ...(staticExport ? {} : { headers: securityHeaders }),
+};
+
+async function securityHeaders() {
     return [
       {
         source: "/(.*)",
@@ -45,7 +58,6 @@ const nextConfig = {
         ],
       },
     ];
-  },
-};
+}
 
 export default nextConfig;

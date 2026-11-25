@@ -1,17 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { CategoryIcon } from "@/components/icons/CategoryIcon";
 import { UiIcon } from "@/components/icons/UiIcon";
-import { categories } from "@/lib/data/categories";
+import { allServices, categories, getCategory } from "@/lib/data/categories";
 import { serviceForms } from "@/lib/data/forms";
 import { formatCOP, minFrom } from "@/lib/data/pricing";
 import { searchServices } from "@/lib/search";
 
-export function ServicePicker({ initialCategory }: { initialCategory: string | null }) {
+export function ServicePicker() {
+  const params = useSearchParams();
+  const router = useRouter();
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<string | null>(initialCategory);
+  const [category, setCategory] = useState<string | null>(() => getCategory(params.get("categoria") ?? "")?.slug ?? null);
+
+  // Compatibilidad con enlaces antiguos (/solicitar?servicio=…)
+  useEffect(() => {
+    const legacy = params.get("servicio");
+    if (legacy && allServices.some((s) => s.slug === legacy)) router.replace(`/solicitar/${legacy}`);
+  }, [params, router]);
 
   const groups = useMemo(() => {
     if (query.trim().length > 1) {

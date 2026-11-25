@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { ServicePicker } from "@/components/forms/ServicePicker";
 import { PaymentMethods } from "@/components/payments/PaymentMethods";
 import { PopularGrid } from "@/components/sections/PopularDocuments";
 import { UiIcon } from "@/components/icons/UiIcon";
-import { allServices, getCategory } from "@/lib/data/categories";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -14,14 +13,11 @@ export const metadata = buildMetadata({
   path: "/solicitar",
 });
 
-type Props = { searchParams: Promise<{ servicio?: string; categoria?: string }> };
-
-export default async function SolicitarPage({ searchParams }: Props) {
-  const sp = await searchParams;
-  // Compatibilidad con enlaces antiguos (/solicitar?servicio=…)
-  if (sp.servicio && allServices.some((s) => s.slug === sp.servicio)) redirect(`/solicitar/${sp.servicio}`);
-  const category = getCategory(sp.categoria ?? "")?.slug ?? null;
-
+/**
+ * Página estática: el filtro ?categoria= y los enlaces antiguos ?servicio= se
+ * resuelven en el navegador (ServicePicker), así funciona también sin servidor.
+ */
+export default function SolicitarPage() {
   return (
     <>
       <section className="bg-hero pt-[72px]">
@@ -50,17 +46,17 @@ export default async function SolicitarPage({ searchParams }: Props) {
         </div>
       </section>
 
-      {!category && (
-        <section className="container-site py-14">
-          <h2 className="mb-6 font-display text-2xl font-bold">Los más solicitados</h2>
-          <PopularGrid />
-        </section>
-      )}
+      <section className="container-site py-14">
+        <h2 className="mb-6 font-display text-2xl font-bold">Los más solicitados</h2>
+        <PopularGrid />
+      </section>
 
       <section className="border-t border-line bg-mist/50">
         <div className="container-site py-14">
           <h2 className="mb-8 font-display text-2xl font-bold">Todos los documentos</h2>
-          <ServicePicker initialCategory={category} />
+          <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-white/70" />}>
+            <ServicePicker />
+          </Suspense>
           <div className="mt-14 flex flex-col items-start gap-4 rounded-xl bg-white p-6 shadow-inset md:flex-row md:items-center md:justify-between">
             <div>
               <p className="font-semibold text-night">¿No está en la lista?</p>

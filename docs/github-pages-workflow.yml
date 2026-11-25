@@ -1,0 +1,66 @@
+# Publica la vitrina estática del sitio en GitHub Pages con cada cambio en main.
+# Versión sin servidor: no incluye API, panel ni pagos; los pedidos se envían
+# por WhatsApp o correo. Para el sitio completo, despliega frontend/ en Vercel.
+name: Publicar sitio en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Quitar rutas que necesitan servidor (API, panel, portal)
+        run: rm -rf src/app/api src/app/admin src/app/portal
+
+      - name: Compilar versión estática
+        env:
+          STATIC_EXPORT: "1"
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_WHATSAPP_NUMBER: "573144809244"
+          NEXT_PUBLIC_CONTACT_PHONE: "+57 314 480 9244"
+          NEXT_PUBLIC_CONTACT_EMAIL: "contacto@vertextechco.online"
+          NEXT_PUBLIC_CONTACT_CITY: "Colombia"
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: npx next build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -116,6 +116,8 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    // Sitio sin sistema de pedidos (p. ej. la vitrina en GitHub Pages): se envía por WhatsApp o correo
+    if (!apiReady) return setStatus("not_configured");
     setStatus("sending");
     setMessage("");
     const email = contact.email.trim().toLowerCase();
@@ -138,7 +140,10 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
         }),
       });
       const json = await res.json().catch(() => ({}));
-      if (res.status === 503 && json.error === "not_configured") return setStatus("not_configured");
+      // 503 = sistema no conectado; 404/405 = versión estática sin API (GitHub Pages): se envía por WhatsApp o correo
+      if ((res.status === 503 && json.error === "not_configured") || res.status === 404 || res.status === 405) {
+        return setStatus("not_configured");
+      }
       if (!res.ok) {
         setMessage(typeof json.detail === "string" ? json.detail : "Revisa los datos e inténtalo de nuevo.");
         return setStatus("error");
@@ -172,7 +177,17 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
   };
 
   if (status === "success" && result) return <Success {...result} />;
-  if (status === "not_configured") return <NotConfigured items={cart.items} fallback={fallback} onBack={() => setStatus("idle")} />;
+  if (status === "not_configured") {
+    return (
+      <NotConfigured
+        items={cart.items}
+        contact={contact}
+        shipping={needsShipping ? { ...shipping, country: international?.values.pais_entrega || shipping.country } : null}
+        fallback={fallback}
+        onBack={() => setStatus("idle")}
+      />
+    );
+  }
 
   if (cart.ready && cart.items.length === 0) {
     return (
@@ -423,9 +438,9 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
           </div>
 
           {!apiReady && (
-            <p className="mt-5 flex gap-2.5 rounded-lg bg-amber-50 p-4 text-sm text-amber-900">
-              <UiIcon name="info" className="mt-0.5 h-4 w-4 shrink-0" />
-              El envío en línea se habilita al conectar el sistema de pedidos. Al continuar te mostramos cómo enviarlo por otro canal.
+            <p className="mt-5 flex gap-2.5 rounded-lg bg-teal-soft p-4 text-sm text-night">
+              <UiIcon name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 text-teal-ink" />
+              Al continuar prepararemos tu pedido para enviarlo por WhatsApp o correo. Te respondemos con la cotización y el enlace de pago.
             </p>
           )}
 
@@ -498,22 +513,44 @@ function Success({ code, email, uploadFailed, payment }: { code: string; email: 
   );
 }
 
-function NotConfigured({ items, fallback, onBack }: { items: CartItem[]; fallback: { whatsapp: string; email: string }; onBack: () => void }) {
-  const summary =
-    "Pedido NEXODOC\n" +
-    items
-      .map((i, n) => `${n + 1}. ${serviceName(i.service)}\n${summarize(getForm(i.service), i.values).map(([k, v]) => `   ${k}: ${v}`).join("\n")}`)
-      .join("\n");
+function NotConfigured({ items, contact, shipping, fallback, onBack }: {
+  items: CartItem[];
+  contact: ContactInput;
+  shipping: ShippingInput | null;
+  fallback: { whatsapp: string; email: string };
+  onBack: () => void;
+}) {
+  const lines = [
+    "Hola, quiero hacer este pedido en NEXODOC:",
+    "",
+    ...items.map((i, n) =>
+      [
+        `${n + 1}. ${serviceName(i.service)} (${zoneLabel[i.values.entrega as DeliveryZone] ?? "entrega por definir"}${i.values.pais_entrega ? ` · ${i.values.pais_entrega}` : ""})`,
+        ...summarize(getForm(i.service), i.values).map(([k, v]) => `   • ${k}: ${v}`),
+      ].join("\n"),
+    ),
+    "",
+    "Mis datos:",
+    `• ${contact.fullName}${contact.company ? ` (${contact.company})` : ""}`,
+    `• ${contact.documentType} ${contact.documentNumber}`,
+    `• ${contact.email} · ${contact.phone}`,
+    `• ${contact.city}`,
+    ...(shipping ? [`• Entrega: ${shipping.recipient}, ${shipping.address}, ${shipping.city}, ${shipping.country}`] : []),
+  ];
+  const summary = lines.join("\n");
   const wa = fallback.whatsapp ? `${fallback.whatsapp.split("?")[0]}?text=${encodeURIComponent(summary)}` : "";
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mx-auto max-w-2xl rounded-xl bg-white p-8 shadow-lift ring-1 ring-night/5 md:p-12" role="status">
-      <span className="grid h-12 w-12 place-items-center rounded-md bg-amber-50 text-amber-700">
-        <UiIcon name="info" className="h-6 w-6" />
+      <span className="grid h-12 w-12 place-items-center rounded-md bg-teal-soft text-teal-ink">
+        <UiIcon name="whatsapp" className="h-6 w-6" />
       </span>
-      <h2 className="mt-6 font-display text-2xl font-bold">El envío en línea aún no está habilitado.</h2>
+      <h2 className="mt-6 font-display text-2xl font-bold">Último paso: envíanos tu pedido.</h2>
       <p className="mt-3 text-slate">
-        Tu información no se ha enviado ni almacenado. {wa || fallback.email ? "Puedes enviarnos el pedido por estos canales:" : "Pronto habilitaremos este canal."}
+        {wa || fallback.email
+          ? "Preparamos el mensaje con tus documentos y tus datos. Envíalo y un gestor te responde con la cotización y el enlace de pago."
+          : "Pronto habilitaremos el envío en línea."}
       </p>
+      <pre className="mt-5 max-h-56 overflow-auto whitespace-pre-wrap rounded-lg bg-mist p-4 font-sans text-sm text-night/85">{summary}</pre>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         {wa && <Button href={wa} variant="light" magnetic={false}>Enviar por WhatsApp</Button>}
         {fallback.email && (

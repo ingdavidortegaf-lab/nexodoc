@@ -4,6 +4,8 @@ import { legalDocuments } from "@/lib/data/legal";
 import { serviceForms } from "@/lib/data/forms";
 import { siteConfig } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const u = (path: string) => `${siteConfig.url}${path}`;

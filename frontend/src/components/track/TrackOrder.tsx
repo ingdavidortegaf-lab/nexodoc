@@ -74,7 +74,7 @@ export function TrackOrder() {
     try {
       const res = await fetch("/api/pedidos/estado", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(parsed.data) });
       const json = await res.json().catch(() => ({}));
-      if (res.status === 503) setMessage("La consulta en línea estará disponible muy pronto. Escríbenos y te contamos cómo va tu pedido.");
+      if (res.status === 503 || (res.status >= 404 && typeof json.detail !== "string")) setMessage("La consulta en línea estará disponible muy pronto. Escríbenos y te contamos cómo va tu pedido.");
       else if (!res.ok) setMessage(typeof json.detail === "string" ? json.detail : "No pudimos consultar el pedido. Inténtalo de nuevo.");
       else setData(json as TrackResult);
     } catch {
