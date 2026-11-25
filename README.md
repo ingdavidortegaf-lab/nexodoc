@@ -187,3 +187,22 @@ cd .. && python3 tools/build_preview.py
 | 2 · Portal | Hoy el cliente consulta con número + correo (`/estado`). El registro con contraseña está deshabilitado (`410`) hasta implementar verificación de correo con enlace de un solo uso |
 | 3 · Panel admin | Panel `/admin` ya disponible. Pendiente: asignar pedidos a gestores, reportes y vista de auditoría |
 | 4 · Integraciones | Wompi, correo (Resend) y WhatsApp ya integrados. Pendiente: n8n, Power BI |
+
+## 7. Página pública en GitHub Pages
+
+Vitrina estática (sin API, panel ni pagos; los pedidos se envían por WhatsApp o correo):
+**https://ingdavidortegaf-lab.github.io/nexodoc/**
+
+Se publica desde la rama `gh-pages`. Para actualizarla después de cambiar el sitio:
+
+```bash
+cd frontend
+rm -rf .next out
+STATIC_EXPORT=1 BASE_PATH=/nexodoc NEXT_PUBLIC_SITE_URL=https://ingdavidortegaf-lab.github.io/nexodoc \
+NEXT_PUBLIC_WHATSAPP_NUMBER=573144809244 NEXT_PUBLIC_CONTACT_EMAIL=contacto@vertextechco.online \
+npx next build   # antes, mueve fuera src/app/api, src/app/admin y src/app/portal (necesitan servidor)
+```
+
+Luego sube el contenido de `frontend/out` (más un archivo vacío `.nojekyll`) a la rama `gh-pages`.
+
+Para que se publique sola con cada cambio, da a la cuenta el permiso de flujos (`gh auth refresh -h github.com -s workflow`) y copia `docs/github-pages-workflow.yml` a `.github/workflows/pages.yml`; luego en *Settings → Pages* elige *GitHub Actions*.
