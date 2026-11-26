@@ -30,8 +30,8 @@ export default async function LegalPage({ params }: Params) {
 
   return (
     <section className="pt-[72px]">
-      <div className="container-site grid gap-12 py-16 lg:grid-cols-[16rem_1fr] lg:py-24">
-        <nav aria-label="Documentos legales" className="lg:sticky lg:top-28 lg:self-start">
+      <div className="container-site grid gap-8 py-10 md:gap-12 md:py-16 lg:grid-cols-[16rem_1fr] lg:py-24">
+        <nav aria-label="Documentos legales" className="min-w-0 lg:sticky lg:top-28 lg:self-start">
           <ul className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:pb-0">
             {legalDocuments.map((d) => (
               <li key={d.slug} className="shrink-0">
@@ -48,7 +48,7 @@ export default async function LegalPage({ params }: Params) {
             ))}
           </ul>
         </nav>
-        <article className="max-w-3xl">
+        <article className="min-w-0 max-w-3xl">
           <p className="font-label text-sm font-semibold text-teal-ink">Documento legal</p>
           <h1 className="mt-3 text-h2 font-extrabold">{doc.title}</h1>
           <p className="mt-3 text-sm text-slate">Última actualización: {new Date(doc.updated).toLocaleDateString("es-CO", { dateStyle: "long" })}</p>
