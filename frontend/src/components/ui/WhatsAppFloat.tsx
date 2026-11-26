@@ -6,7 +6,8 @@ import { UiIcon } from "@/components/icons/UiIcon";
 /** Botón flotante de WhatsApp. Sólo aparece si NEXT_PUBLIC_WHATSAPP_NUMBER está configurado. */
 export function WhatsAppFloat({ href }: { href: string }) {
   const pathname = usePathname();
-  if (!href || pathname.startsWith("/pago") || pathname.startsWith("/admin")) return null;
+  // En el carrito la barra inferior de pago ocupa ese espacio
+  if (!href || pathname.startsWith("/pago") || pathname.startsWith("/admin") || pathname.startsWith("/carrito")) return null;
   return (
     <a
       href={href}

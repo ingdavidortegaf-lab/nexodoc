@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { DocumentSearch } from "@/components/sections/DocumentSearch";
 import { ServicesCatalog } from "@/components/sections/ServicesCatalog";
 import { PopularDocuments } from "@/components/sections/PopularDocuments";
+import { VideoBanner } from "@/components/sections/VideoBanner";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { BusinessSection } from "@/components/sections/BusinessSection";
 import { WhyNexodoc } from "@/components/sections/WhyNexodoc";
@@ -31,6 +32,7 @@ export default function HomePage() {
         }}
       />
       <Hero />
+      <VideoBanner />
       <DocumentSearch />
       <PopularDocuments />
       <ServicesCatalog />

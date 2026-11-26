@@ -49,7 +49,8 @@ export function ServicesCatalog({ withHeading = true }: { withHeading?: boolean 
           </div>
         )}
 
-        <RevealGroup className={`grid gap-4 md:grid-cols-2 lg:grid-cols-3 ${withHeading ? "mt-14" : ""}`} stagger={0.06}>
+        <SwipeHint className={withHeading ? "mt-8" : ""} />
+        <RevealGroup className={`nx-rail-md grid gap-4 md:grid-cols-2 lg:grid-cols-3 ${withHeading ? "mt-4 md:mt-14" : "mt-4 md:mt-0"}`} stagger={0.06}>
           {categories.map((c, i) => (
             <RevealItem key={c.slug} className={layout[i]?.span ?? ""}>
               <CategoryCard category={c} tone={layout[i]?.tone ?? "plain"} />
@@ -58,6 +59,16 @@ export function ServicesCatalog({ withHeading = true }: { withHeading?: boolean 
         </RevealGroup>
       </div>
     </section>
+  );
+}
+
+/** Indicación en celular de que la fila se desliza. */
+export function SwipeHint({ className = "", breakpoint = "md" }: { className?: string; breakpoint?: "sm" | "md" }) {
+  return (
+    <p className={`flex items-center gap-2 font-label text-sm font-semibold text-slate ${breakpoint === "sm" ? "sm:hidden" : "md:hidden"} ${className}`}>
+      Desliza para ver más
+      <UiIcon name="arrowRight" className="h-4 w-4 animate-[nx-nudge_1.6s_ease-in-out_infinite] motion-reduce:animate-none" />
+    </p>
   );
 }
 

@@ -81,7 +81,7 @@ export function ServiceForm({ service, serviceName }: { service: string; service
   const visible = spec.fields.filter((f) => isVisible(f, values));
 
   return (
-    <div className="rounded-xl bg-white p-6 shadow-lift ring-1 ring-night/5 md:p-10">
+    <div className="-mx-1 rounded-xl bg-white p-5 shadow-lift ring-1 ring-night/5 sm:mx-0 sm:p-6 md:p-10">
       <AnimatePresence>
         {added && (
           <motion.div
@@ -164,6 +164,7 @@ export function ServiceForm({ service, serviceName }: { service: string; service
           <div className="md:col-span-2">
             <Field label="¿Cómo deseas recibirlo?" error={errors.entrega} as="legend">
               <Choice
+                rows
                 name="entrega"
                 value={values.entrega ?? ""}
                 onChange={(v) => set("entrega", v)}

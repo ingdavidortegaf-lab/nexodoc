@@ -37,6 +37,12 @@ export const siteConfig = {
   publicApiUrl: (process.env.NEXT_PUBLIC_API_URL ?? "").replace(/\/$/, ""),
 };
 
+/**
+ * Ruta de un archivo de /public respetando la subruta del sitio (p. ej.
+ * /nexodoc en GitHub Pages). Next no la agrega sola a <video>, <img> ni fetch.
+ */
+export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
 export const whatsappLink = (message = "Hola, quiero solicitar un documento con NEXODOC.") =>
   siteConfig.contact.whatsapp
     ? `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`

@@ -51,13 +51,13 @@ export function BusinessSection() {
                 </li>
               ))}
             </ul>
-            <Button href="/solicitar?tipo=empresa" variant="light" size="lg" arrow>
+            <Button href="/solicitar?tipo=empresa" variant="light" size="lg" arrow className="w-full sm:w-auto" magnetic={false}>
               Solicitar una propuesta empresarial
             </Button>
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_1.05fr] lg:items-start">
+        <div className="mt-10 grid gap-6 md:mt-16 lg:grid-cols-[1fr_1.05fr] lg:items-start">
           {/* Tablero de lote: muestra cómo se ve una solicitud masiva */}
           <Reveal className="rounded-xl bg-white/[0.04] p-5 ring-1 ring-white/10 backdrop-blur md:p-7">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -101,14 +101,14 @@ export function BusinessSection() {
             <p className="mt-4 text-xs text-white/40">Ejemplo ilustrativo con datos ficticios.</p>
           </Reveal>
 
-          <RevealGroup className="grid gap-px overflow-hidden rounded-xl bg-white/10 ring-1 ring-white/10 sm:grid-cols-2">
+          <RevealGroup className="grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 ring-1 ring-white/10">
             {businessFeatures.map((f, i) => (
-              <RevealItem key={f.title} className="group bg-night p-6 transition-colors duration-500 hover:bg-navy md:p-7">
+              <RevealItem key={f.title} className="group bg-night p-4 transition-colors duration-500 hover:bg-navy sm:p-6 md:p-7">
                 <span className="grid h-10 w-10 place-items-center rounded-md bg-white/5 text-teal-300 ring-1 ring-white/10 transition-colors group-hover:bg-teal group-hover:text-night">
                   <UiIcon name={featureIcons[i]} className="h-5 w-5" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-bold text-white">{f.title}</h3>
-                <p className="mt-2 text-[0.9375rem] text-white/65">{f.text}</p>
+                <h3 className="mt-4 font-display text-base font-bold leading-snug text-white sm:mt-5 sm:text-lg">{f.title}</h3>
+                <p className="mt-2 text-sm text-white/65 sm:text-[0.9375rem]">{f.text}</p>
               </RevealItem>
             ))}
           </RevealGroup>

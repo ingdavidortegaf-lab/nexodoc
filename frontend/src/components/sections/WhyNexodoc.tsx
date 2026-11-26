@@ -10,7 +10,7 @@ export function WhyNexodoc() {
   return (
     <section id="nosotros" className="section-y" aria-labelledby="nosotros-title">
       <div className="container-site">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div className="grid gap-8 md:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
             <SectionHeading
               id="nosotros-title"
@@ -29,11 +29,11 @@ export function WhyNexodoc() {
             </Reveal>
           </div>
 
-          <RevealGroup className="grid gap-4 sm:grid-cols-2">
+          <RevealGroup className="nx-rail-sm grid gap-4 sm:grid-cols-2">
             {pillars.map((p, i) => (
               <RevealItem
                 key={p.title}
-                className="group rounded-xl bg-white p-7 shadow-card ring-1 ring-night/5 transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
+                className="group rounded-xl bg-white p-6 shadow-card ring-1 ring-night/5 transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
               >
                 <span className="relative grid h-12 w-12 place-items-center rounded-md bg-night text-white">
                   <UiIcon name={pillarIcons[i]} className="h-6 w-6" />
@@ -46,9 +46,9 @@ export function WhyNexodoc() {
           </RevealGroup>
         </div>
 
-        <Reveal className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-line ring-1 ring-line lg:grid-cols-4">
+        <Reveal className="mt-10 grid grid-cols-2 gap-px md:mt-16 overflow-hidden rounded-xl bg-line ring-1 ring-line lg:grid-cols-4">
           {stats.map((s) => (
-            <div key={s.label} className="bg-white px-6 py-8 md:px-8 md:py-10">
+            <div key={s.label} className="bg-white px-5 py-6 md:px-8 md:py-10">
               <p className="font-display text-[clamp(2.25rem,1.6rem+2.4vw,3.5rem)] font-extrabold leading-none tracking-[-0.04em] text-night">
                 <Counter value={s.value} suffix={s.suffix} />
               </p>

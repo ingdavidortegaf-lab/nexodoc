@@ -101,29 +101,33 @@ export function Check({
 }
 
 /** Grupo de opciones tipo "pastilla" (radio accesible). */
-export function Choice({ name, value, options, onChange }: {
+export function Choice({ name, value, options, onChange, rows = false }: {
   name: string;
   value: string;
   options: { value: string; label: string; detail?: string }[];
   onChange: (v: string) => void;
+  /** Filas a todo el ancho con el detalle a la derecha (en celular); pastillas desde sm. */
+  rows?: boolean;
 }) {
   return (
-    <div className="flex flex-wrap gap-2.5">
+    <div className={rows ? "grid gap-2 sm:flex sm:flex-wrap sm:gap-2.5" : "flex flex-wrap gap-2.5"}>
       {options.map((o) => {
         const active = value === o.value;
         return (
           <label
             key={o.value}
-            className={`flex min-h-11 cursor-pointer items-center gap-2.5 rounded-full px-4 py-2 text-[0.9375rem] ring-1 transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-teal ${
-              active ? "bg-night text-white ring-night" : "bg-white text-night ring-line-strong hover:ring-night/40"
-            }`}
+            className={`flex min-h-12 cursor-pointer items-center gap-2.5 px-4 py-2 text-[0.9375rem] ring-1 transition-colors duration-200 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-teal sm:min-h-11 ${
+              rows ? "rounded-md sm:rounded-full" : "rounded-full"
+            } ${active ? "bg-night text-white ring-night" : "bg-white text-night ring-line-strong hover:ring-night/40"}`}
           >
             <input type="radio" name={name} value={o.value} checked={active} onChange={() => onChange(o.value)} className="sr-only" />
             <span className={`grid h-4 w-4 shrink-0 place-items-center rounded-full ring-1 ${active ? "ring-white" : "ring-line-strong"}`}>
               {active && <span className="h-2 w-2 rounded-full bg-teal-300" />}
             </span>
             <span className="font-medium">{o.label}</span>
-            {o.detail && <span className={`text-sm ${active ? "text-white/70" : "text-slate"}`}>{o.detail}</span>}
+            {o.detail && (
+              <span className={`text-sm tabular-nums ${rows ? "ml-auto sm:ml-0" : ""} ${active ? "text-white/70" : "text-slate"}`}>{o.detail}</span>
+            )}
           </label>
         );
       })}

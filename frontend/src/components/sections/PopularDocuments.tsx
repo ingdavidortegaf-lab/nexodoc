@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { UiIcon } from "@/components/icons/UiIcon";
 import { DocIllustration, serviceArt } from "@/components/illustrations/DocIllustrations";
+import { SwipeHint } from "@/components/sections/ServicesCatalog";
 import { allServices } from "@/lib/data/categories";
 import { formatCOP, getPricing, minFrom, zoneLabel, type DeliveryZone } from "@/lib/data/pricing";
 
@@ -18,7 +19,8 @@ export function PopularGrid() {
   const top = featuredServices.map((slug) => allServices.find((s) => s.slug === slug)).filter((s) => s !== undefined);
   return (
     <>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <SwipeHint breakpoint="sm" className="mb-3" />
+      <ul className="nx-rail-sm grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {top.map((s) => {
           const p = getPricing(s.slug);
           const from = minFrom(s.slug);

@@ -40,6 +40,7 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: staticExport ? { unoptimized: true } : { formats: ["image/avif", "image/webp"] },
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   ...(staticExport && { output: "export", trailingSlash: true, basePath }),
   ...(staticExport ? {} : { headers: securityHeaders }),
 };

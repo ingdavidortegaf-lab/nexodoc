@@ -259,9 +259,9 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
                     {lines.length > 0 && (
                       <dl className="mt-3 grid gap-x-5 gap-y-1 text-sm sm:grid-cols-2">
                         {lines.map(([k, v]) => (
-                          <div key={k} className="flex min-w-0 gap-1.5">
-                            <dt className="shrink-0 text-slate">{k}:</dt>
-                            <dd className="truncate font-medium text-night">{v}</dd>
+                          <div key={k} className="min-w-0">
+                            <dt className="inline text-slate">{k}: </dt>
+                            <dd className="inline break-words font-medium text-night">{v}</dd>
                           </div>
                         ))}
                       </dl>
@@ -470,6 +470,21 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
         </div>
         <PaymentMethods compact />
       </aside>
+
+      {/* Celular: total y botón siempre a mano, sin bajar hasta el final */}
+      {!busy && (
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 px-4 pt-3 shadow-[0_-12px_30px_-18px_rgb(16_36_58/0.35)] backdrop-blur-xl lg:hidden" style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
+          <div className="mx-auto flex max-w-lg items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs text-slate">{verificationTotal > 0 ? "Pagas hoy" : `${cart.items.length} ${cart.items.length === 1 ? "documento" : "documentos"}`}</p>
+              <p className="font-display text-lg font-extrabold tabular-nums text-night">{verificationTotal > 0 ? formatCOP(verificationTotal) : "Sin costo hoy"}</p>
+            </div>
+            <Button type="submit" disabled={!cart.ready} magnetic={false}>
+              {verificationTotal > 0 ? "Pagar" : "Enviar pedido"}
+            </Button>
+          </div>
+        </div>
+      )}
     </form>
   );
 }

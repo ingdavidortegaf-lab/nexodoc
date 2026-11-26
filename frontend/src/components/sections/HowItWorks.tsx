@@ -25,7 +25,7 @@ export function HowItWorks() {
 
   return (
     <section id="como-funciona" className="section-y relative bg-mist" aria-labelledby="como-title">
-      <div className="container-site grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+      <div className="container-site grid gap-10 md:gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeading
             id="como-title"
@@ -72,7 +72,7 @@ function Step({
   }, [inView, index, onActive]);
 
   return (
-    <li ref={ref} className="relative flex gap-6 pb-12 last:pb-0">
+    <li ref={ref} className="relative flex gap-4 pb-8 last:pb-0 sm:gap-6 sm:pb-12">
       <span
         className={`relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full font-label text-base font-bold transition-all duration-500 ease-out-expo ${
           active ? "bg-night text-white shadow-[0_0_0_6px_rgb(25_183_176/0.18)]" : "bg-white text-slate ring-1 ring-line-strong"
@@ -81,8 +81,8 @@ function Step({
         {index + 1}
       </span>
       <div className={`pt-2 transition-opacity duration-500 ${active ? "opacity-100" : "opacity-55"}`}>
-        <h3 className="text-h3 font-bold">{title}</h3>
-        <p className="mt-2 max-w-md text-slate">{text}</p>
+        <h3 className="text-lg font-bold sm:text-h3">{title}</h3>
+        <p className="mt-1.5 max-w-md text-[0.9375rem] text-slate sm:mt-2 sm:text-base">{text}</p>
       </div>
     </li>
   );

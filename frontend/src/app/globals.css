@@ -159,6 +159,56 @@
   }
 }
 
+/*
+ * Carrusel horizontal en celular (se desliza con el dedo y encaja en cada tarjeta).
+ * .nx-rail-sm aplica por debajo de 640 px y .nx-rail-md por debajo de 768 px; arriba
+ * de eso manda la retícula de Tailwind del propio elemento.
+ */
+@media (max-width: 639.98px) {
+  .nx-rail-sm {
+    display: flex;
+    gap: 0.875rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * clamp(1.25rem, 4vw, 2.5rem));
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    scroll-padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    padding-bottom: 0.75rem;
+  }
+  .nx-rail-sm > * {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+  }
+}
+@media (max-width: 767.98px) {
+  .nx-rail-md {
+    display: flex;
+    gap: 0.875rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    margin-inline: calc(-1 * clamp(1.25rem, 4vw, 2.5rem));
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    scroll-padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    padding-bottom: 0.75rem;
+  }
+  .nx-rail-md > * {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+}
+@keyframes nx-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+.nx-rail-sm::-webkit-scrollbar,
+.nx-rail-md::-webkit-scrollbar {
+  display: none;
+}
+
 /* Aparición al hacer scroll (ver components/ui/Reveal.tsx) */
 .nx-reveal,
 .nx-reveal-group > .nx-reveal-item {
@@ -203,7 +253,7 @@
 }
 
 @utility section-y {
-  padding-block: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  padding-block: clamp(3.75rem, 2.5rem + 6vw, 8.5rem);
 }
 
 /* Retícula de puntos sutil para fondos */
