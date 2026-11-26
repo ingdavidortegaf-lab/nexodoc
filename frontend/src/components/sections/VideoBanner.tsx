@@ -138,7 +138,7 @@ export function VideoBanner() {
             </button>
           </div>
           <p className="mt-3 flex items-center gap-2 text-xs text-white/50">
-            <UiIcon name="info" className="h-3.5 w-3.5" /> Video sin sonido · 15 s
+            <UiIcon name="info" className="h-3.5 w-3.5" /> Video sin sonido · 14 s
           </p>
         </div>
       </div>

@@ -206,3 +206,22 @@ npx next build   # antes, mueve fuera src/app/api, src/app/admin y src/app/porta
 Luego sube el contenido de `frontend/out` (más un archivo vacío `.nojekyll`) a la rama `gh-pages`.
 
 Para que se publique sola con cada cambio, da a la cuenta el permiso de flujos (`gh auth refresh -h github.com -s workflow`) y copia `docs/github-pages-workflow.yml` a `.github/workflows/pages.yml`; luego en *Settings → Pages* elige *GitHub Actions*.
+
+## 8. Video promocional (banner de la portada y redes)
+
+El video se programa con [Remotion](https://www.remotion.dev) en `video/` (React, colores y tipografías de la marca, sin material de terceros). Tres formatos:
+
+| Composición | Tamaño | Uso |
+|---|---|---|
+| `PromoBanner` | 1280×720 | Banner «Así funciona» de la portada en escritorio |
+| `PromoCuadrado` | 1080×1080 | Banner en celular y feed de Instagram/Facebook |
+| `PromoHistoria` | 1080×1920 | Historias y Reels |
+
+```bash
+cd video
+npm install
+npm run dev                 # Remotion Studio para ver y ajustar el video
+npm run render:horizontal   # y render:cuadrado, render:historia, render:posters
+```
+
+Copia `out/nexodoc-promo-horizontal.mp4`, `out/nexodoc-promo-cuadrado.mp4` y sus `.jpg` (póster) a `frontend/public/video/`. La primera vez Remotion descarga su navegador de renderizado (~120 MB).
