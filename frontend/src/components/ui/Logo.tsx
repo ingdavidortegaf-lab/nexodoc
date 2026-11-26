@@ -26,7 +26,7 @@ export function LogoMark({ tone = "light", className = "h-8 w-8" }: { tone?: "li
 export function Logo({ tone = "light", href = "/" }: { tone?: "light" | "dark"; href?: string }) {
   const color = tone === "light" ? "text-night" : "text-white";
   return (
-    <Link href={href} className={`group inline-flex items-center gap-2.5 ${color}`} aria-label="NEXODOC, ir al inicio">
+    <Link href={href} className={`group -my-1.5 inline-flex items-center gap-2.5 py-1.5 ${color}`} aria-label="NEXODOC, ir al inicio">
       <LogoMark tone={tone} className="h-8 w-8 transition-transform duration-500 ease-out-expo group-hover:-rotate-6" />
       <span className="font-display text-[1.32rem] leading-none tracking-[-0.02em]">
         <span className="font-extrabold">NEXO</span>

@@ -122,6 +122,76 @@
   }
 }
 
+/* Entrada de la portada en CSS: visible apenas carga, sin esperar JavaScript */
+@keyframes nx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes nx-word {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(6px);
+  }
+}
+@keyframes nx-page {
+  from {
+    opacity: 0.001;
+    transform: translateY(6px);
+  }
+}
+.nx-page {
+  animation: nx-page 0.45s var(--ease-out-expo) both;
+}
+.nx-rise {
+  animation: nx-rise 0.8s var(--ease-out-expo) both;
+}
+.nx-word {
+  animation: nx-word 0.75s var(--ease-out-expo) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nx-page,
+  .nx-rise,
+  .nx-word {
+    animation: none;
+  }
+}
+
+/* Aparición al hacer scroll (ver components/ui/Reveal.tsx) */
+.nx-reveal,
+.nx-reveal-group > .nx-reveal-item {
+  transition:
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo);
+}
+.nx-reveal {
+  transition-delay: var(--nx-delay, 0s);
+}
+.nx-reveal[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(var(--nx-y, 28px));
+}
+.nx-reveal-group[data-reveal="pending"] > .nx-reveal-item {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.nx-reveal-group > .nx-reveal-item:nth-child(2) { transition-delay: calc(var(--nx-stagger, 0.08s) * 1); }
+.nx-reveal-group > .nx-reveal-item:nth-child(3) { transition-delay: calc(var(--nx-stagger, 0.08s) * 2); }
+.nx-reveal-group > .nx-reveal-item:nth-child(4) { transition-delay: calc(var(--nx-stagger, 0.08s) * 3); }
+.nx-reveal-group > .nx-reveal-item:nth-child(5) { transition-delay: calc(var(--nx-stagger, 0.08s) * 4); }
+.nx-reveal-group > .nx-reveal-item:nth-child(6) { transition-delay: calc(var(--nx-stagger, 0.08s) * 5); }
+.nx-reveal-group > .nx-reveal-item:nth-child(n + 7) { transition-delay: calc(var(--nx-stagger, 0.08s) * 6); }
+
+/* Respuesta inmediata al tocar (los :hover ya sólo aplican con mouse en Tailwind v4) */
+@media (pointer: coarse) {
+  a.inline-flex:active,
+  button:active {
+    opacity: 0.86;
+  }
+}
+
 /* ==========================================================================
    Utilidades propias
    ========================================================================== */
@@ -303,6 +373,8 @@
 
 /* Enlaces del footer */
 .footer-link {
+  display: inline-block;
+  padding-block: 0.375rem; /* área de toque cómoda en celular */
   color: rgb(255 255 255 / 0.65);
   transition: color 0.25s var(--ease-out-expo);
 }

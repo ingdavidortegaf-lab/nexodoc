@@ -27,9 +27,9 @@ export function Footer() {
   return (
     <footer id="contacto" className="relative overflow-hidden bg-night text-white">
       <div className="bg-dots-light pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
-      <div className="container-site relative pb-10 pt-20">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
-          <div className="max-w-sm">
+      <div className="container-site relative pb-28 pt-16 sm:pb-10 sm:pt-20">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
+          <div className="col-span-2 max-w-sm lg:col-span-1">
             <Logo tone="dark" />
             <p className="mt-5 text-[0.9375rem] leading-relaxed text-white/65">
               Empresa colombiana independiente de gestión documental. Conectamos tus necesidades con las entidades
@@ -74,7 +74,7 @@ export function Footer() {
             ))}
           </FooterColumn>
 
-          <FooterColumn title="Contacto">
+          <FooterColumn title="Contacto" wide>
             {contact.email && (
               <li>
                 <a href={`mailto:${contact.email}`} className="footer-link inline-flex items-center gap-2">
@@ -122,7 +122,7 @@ export function Footer() {
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legalDocuments.map((d) => (
               <li key={d.slug}>
-                <Link href={`/legal/${d.slug}`} className="hover:text-white">
+                <Link href={`/legal/${d.slug}`} className="inline-block py-1.5 hover:text-white">
                   {d.shortTitle}
                 </Link>
               </li>
@@ -134,11 +134,11 @@ export function Footer() {
   );
 }
 
-function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+function FooterColumn({ title, children, wide = false }: { title: string; children: React.ReactNode; wide?: boolean }) {
   return (
-    <div>
+    <div className={wide ? "col-span-2 lg:col-span-1" : ""}>
       <h2 className="font-label text-sm font-semibold text-white">{title}</h2>
-      <ul className="mt-5 space-y-3 text-[0.9375rem]">{children}</ul>
+      <ul className="mt-4 space-y-1 text-[0.9375rem] sm:mt-5 sm:space-y-1.5">{children}</ul>
     </div>
   );
 }

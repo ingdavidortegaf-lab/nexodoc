@@ -78,11 +78,11 @@ export default async function CategoryPage({ params }: Params) {
           <nav aria-label="Ruta de navegación" className="font-label text-sm text-slate">
             <ol className="flex flex-wrap items-center gap-2">
               <li>
-                <Link href="/" className="hover:text-night">Inicio</Link>
+                <Link href="/" className="inline-block py-2 hover:text-night">Inicio</Link>
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href="/servicios" className="hover:text-night">Servicios</Link>
+                <Link href="/servicios" className="inline-block py-2 hover:text-night">Servicios</Link>
               </li>
               <li aria-hidden="true">/</li>
               <li aria-current="page" className="font-semibold text-night">{category.shortName}</li>

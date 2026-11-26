@@ -213,7 +213,7 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
         <section id="carrito-items" className="rounded-xl bg-white p-6 shadow-card ring-1 ring-night/5 md:p-8" aria-labelledby="h-docs">
           <div className="flex items-center justify-between gap-4">
             <h2 id="h-docs" className="font-display text-xl font-bold">Documentos ({cart.items.length})</h2>
-            <Link href="/solicitar" className="inline-flex items-center gap-1.5 font-label text-sm font-semibold text-teal-ink">
+            <Link href="/solicitar" className="-my-2 inline-flex items-center gap-1.5 py-2 font-label text-sm font-semibold text-teal-ink">
               <UiIcon name="plus" className="h-4 w-4" /> Agregar otro
             </Link>
           </div>
@@ -273,10 +273,10 @@ export function Checkout({ apiReady, publicApiUrl, fallback }: {
                       </p>
                     )}
                     <div className="mt-4 flex gap-2">
-                      <Link href={`/solicitar/${item.service}?editar=${item.id}`} className="rounded-full px-3.5 py-1.5 font-label text-sm font-semibold text-night ring-1 ring-line-strong hover:bg-white">
+                      <Link href={`/solicitar/${item.service}?editar=${item.id}`} className="rounded-full px-4 py-2.5 font-label text-sm font-semibold text-night ring-1 ring-line-strong hover:bg-white sm:py-1.5">
                         Editar
                       </Link>
-                      <button type="button" onClick={() => cart.remove(item.id)} className="rounded-full px-3.5 py-1.5 font-label text-sm font-semibold text-slate hover:bg-white hover:text-red-700">
+                      <button type="button" onClick={() => cart.remove(item.id)} className="rounded-full px-4 py-2.5 font-label text-sm font-semibold text-slate hover:bg-white hover:text-red-700 sm:py-1.5">
                         Quitar
                       </button>
                     </div>

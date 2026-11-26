@@ -51,7 +51,7 @@ export function ServicePicker() {
             type="button"
             onClick={() => setCategory(null)}
             aria-pressed={!category}
-            className={`shrink-0 rounded-full px-4 py-2 font-label text-sm font-semibold ring-1 transition-colors ${!category ? "bg-night text-white ring-night" : "bg-white text-night ring-line hover:ring-night/30"}`}
+            className={`min-h-11 shrink-0 rounded-full px-4 py-2 font-label md:min-h-0 text-sm font-semibold ring-1 transition-colors ${!category ? "bg-night text-white ring-night" : "bg-white text-night ring-line hover:ring-night/30"}`}
           >
             Todas
           </button>
@@ -61,7 +61,7 @@ export function ServicePicker() {
               type="button"
               onClick={() => setCategory(c.slug === category ? null : c.slug)}
               aria-pressed={category === c.slug}
-              className={`shrink-0 rounded-full px-4 py-2 font-label text-sm font-semibold ring-1 transition-colors ${category === c.slug ? "bg-night text-white ring-night" : "bg-white text-night ring-line hover:ring-night/30"}`}
+              className={`min-h-11 shrink-0 rounded-full px-4 py-2 font-label md:min-h-0 text-sm font-semibold ring-1 transition-colors ${category === c.slug ? "bg-night text-white ring-night" : "bg-white text-night ring-line hover:ring-night/30"}`}
             >
               {c.shortName}
             </button>

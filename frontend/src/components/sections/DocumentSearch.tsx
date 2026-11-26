@@ -177,7 +177,7 @@ export function DocumentSearch() {
                         setActive(0);
                         inputRef.current?.focus();
                       }}
-                      className={`inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full px-3.5 font-label text-sm font-medium transition-all duration-300 ease-out-expo ${
+                      className={`inline-flex h-11 shrink-0 items-center gap-1.5 rounded-full px-4 md:h-9 md:px-3.5 font-label text-sm font-medium transition-all duration-300 ease-out-expo ${
                         selected ? "bg-night text-white" : "bg-white text-night ring-1 ring-line hover:ring-night/30"
                       }`}
                     >
@@ -203,7 +203,7 @@ export function DocumentSearch() {
                         setCategory(null);
                         inputRef.current?.focus();
                       }}
-                      className="font-medium text-night underline decoration-line underline-offset-4 transition-colors hover:decoration-teal"
+                      className="inline-block py-1.5 font-medium text-night underline decoration-line underline-offset-4 transition-colors hover:decoration-teal"
                     >
                       {p}
                     </button>

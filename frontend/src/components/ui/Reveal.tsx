@@ -1,54 +1,69 @@
 "use client";
 
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
-interface RevealProps extends HTMLMotionProps<"div"> {
-  delay?: number;
-  y?: number;
+/**
+ * Aparición al hacer scroll, sin ocultar nada antes de que cargue el JavaScript.
+ *
+ * El contenido se envía visible desde el servidor. Al montar, sólo lo que está
+ * por debajo de la pantalla se marca como «pendiente» y se anima al entrar.
+ * Lo que ya está a la vista no se oculta nunca (antes, en celulares lentos, las
+ * secciones quedaban en blanco hasta que cargaba Motion). Las transiciones viven
+ * en globals.css (.nx-reveal) y respetan prefers-reduced-motion.
+ */
+function useReveal<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return; // ya visible
+    el.dataset.reveal = "pending";
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          el.dataset.reveal = "in";
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
 }
 
-/** Aparición al hacer scroll. Respeta prefers-reduced-motion. */
-export function Reveal({ delay = 0, y = 28, children, ...rest }: RevealProps) {
-  const reduce = useReducedMotion();
+type Base = { children: ReactNode; className?: string; style?: CSSProperties; id?: string };
+
+export function Reveal({ delay = 0, y = 28, children, className, style, id }: Base & { delay?: number; y?: number }) {
+  const ref = useReveal<HTMLDivElement>();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: reduce ? 0 : y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      {...rest}
+    <div
+      ref={ref}
+      id={id}
+      className={`nx-reveal ${className ?? ""}`}
+      style={{ ...style, ["--nx-y" as string]: `${y}px`, ["--nx-delay" as string]: `${delay}s` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 /** Contenedor que escalona la aparición de sus hijos <RevealItem>. */
-export function RevealGroup({ children, stagger = 0.08, ...rest }: HTMLMotionProps<"div"> & { stagger?: number }) {
+export function RevealGroup({ children, className, style, id, stagger = 0.08 }: Base & { stagger?: number }) {
+  const ref = useReveal<HTMLDivElement>();
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: stagger } } }}
-      {...rest}
-    >
+    <div ref={ref} id={id} className={`nx-reveal-group ${className ?? ""}`} style={{ ...style, ["--nx-stagger" as string]: `${stagger}s` }}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-export function RevealItem({ children, ...rest }: HTMLMotionProps<"div">) {
-  const reduce = useReducedMotion();
+export function RevealItem({ children, className, style, id }: Base) {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: reduce ? 0 : 22 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-      }}
-      {...rest}
-    >
+    <div id={id} className={`nx-reveal-item ${className ?? ""}`} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }

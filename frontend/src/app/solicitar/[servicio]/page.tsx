@@ -64,11 +64,11 @@ export default async function ServiceRequestPage({ params }: Params) {
         <div className="lg:col-start-1 lg:row-start-1">
           <nav aria-label="Ruta de navegación" className="font-label text-sm text-slate">
             <ol className="flex flex-wrap items-center gap-2">
-              <li><Link href="/solicitar" className="hover:text-night">Solicitar</Link></li>
+              <li><Link href="/solicitar" className="inline-block py-2 hover:text-night">Solicitar</Link></li>
               {s.category && (
                 <>
                   <li aria-hidden="true">/</li>
-                  <li><Link href={`/servicios/${s.category.slug}`} className="hover:text-night">{s.category.shortName}</Link></li>
+                  <li><Link href={`/servicios/${s.category.slug}`} className="inline-block py-2 hover:text-night">{s.category.shortName}</Link></li>
                 </>
               )}
             </ol>
