@@ -60,7 +60,7 @@ export function VideoBanner() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-night py-16 text-white md:py-24" aria-labelledby="video-title">
+    <section className="relative overflow-hidden bg-night pb-32 pt-16 text-white md:pb-40 md:pt-24 lg:pb-44" aria-labelledby="video-title">
       <div className="bg-dots-light pointer-events-none absolute inset-0 opacity-50" aria-hidden="true" />
       <div
         className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-teal/20 blur-3xl"
