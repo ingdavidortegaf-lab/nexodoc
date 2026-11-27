@@ -1,0 +1,10 @@
+User-Agent: *
+Allow: /
+Disallow: /portal
+Disallow: /admin
+Disallow: /api
+Disallow: /carrito
+Disallow: /pago
+
+Host: https://ingdavidortegaf-lab.github.io/nexodoc
+Sitemap: https://ingdavidortegaf-lab.github.io/nexodoc/sitemap.xml
